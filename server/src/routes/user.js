@@ -44,7 +44,7 @@ router.post("/login", async(req, res) => {
         res.json({message: "Wrong Password!"});
     }
     let payload = {
-        "id": JSON.stringify(user._id),
+        "id": user._id,
         "role": "Admin"
       };
 
@@ -58,17 +58,23 @@ router.get("/token", async(req, res) => {
     if (token == null) {
         res.status(401).send(); // Unauthorized
     }
-    jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
         if (err) {
           res.status(403).send(); // Forbidden
         }
+        return user
     });
 
-    let id = jwt.verify(token, process.env.TOKEN_KEY).id;
-    // const user = await UserModel.findById({ _id: new mongoose.Types.ObjectId(id)})
+    const id = decoded.id
+    const user = await UserModel.findById(id)
 
-    console.log(await UserModel.findById(new mongoose.Types.ObjectId(id)))
-    res.json({message: true })
+    // find user and check role permissions
+    if(user && decoded.role == 'Admin'){
+        res.json({ token: true })
+    } else {
+        res.status(404).send(); // Not Found
+    }
+
 });
 
 export { router as userRouter }
