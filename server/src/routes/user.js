@@ -59,8 +59,7 @@ router.post("/login", async(req, res) => {
 });
 
 router.get("/token", async(req, res) => {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+    const token = req.headers.cookie.slice(6) || null;
     if (token == null) {
         res.status(401).send(); // Unauthorized
     }
@@ -80,7 +79,6 @@ router.get("/token", async(req, res) => {
     } else {
         res.status(404).send(); // Not Found
     }
-
 });
 
 export { router as userRouter }

@@ -1,5 +1,11 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function NavBar() {
-    return <Link href="/account/login">Login</Link>;
+    return (
+      <ul>
+        <li>
+          <Link href="/account/login">Login</Link>
+        </li>
+      </ul>
+    )
   }
