@@ -59,10 +59,15 @@ router.post("/login", async(req, res) => {
 });
 
 router.get("/token", async(req, res) => {
-    const token = req.headers.cookie.slice(6) || null;
+    let token;
+    //check if token
+    if(!req.headers.cookie) token=null
+    else token=req.headers.cookie.slice(6);
+
     if (token == null) {
-        res.status(401).send(); // Unauthorized
+        res.status(401).json({ token: false }); // Unauthorized
     }
+    
     const decoded = jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
         if (err) {
           res.status(403).send(); // Forbidden
