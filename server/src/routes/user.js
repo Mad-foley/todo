@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt, { hash } from 'bcrypt';
 import { UserModel } from '../models/user.js';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 
 
 const router = express.Router();
@@ -33,13 +32,12 @@ router.post("/create", async(req, res) => {
 
 router.post("/login", async(req, res) => {
     const { username, password } = req.body;
-    const user = await UserModel.findOne({ username });
-
+    const user = await UserModel.findOne( { username } );
     if (!user) {
         res.json({message: "User Doesn't Exist!"});
     }
+    const isPasswordValid = await bcrypt.compare(password, user['password'])
 
-    const isPasswordValid = await bcrypt.compare(password, user.password)
     if (!isPasswordValid) {
         res.json({message: "Wrong Password!"});
     }
@@ -48,8 +46,16 @@ router.post("/login", async(req, res) => {
         "role": "Admin"
       };
 
-    const token = jwt.sign(payload, process.env.TOKEN_KEY, { noTimestamp:true, expiresIn: '1h' });
-    res.status(200).send(JSON.stringify({ accessToken: token }));
+    let token = jwt.sign(payload, process.env.TOKEN_KEY, {
+        expiresIn: '1h',
+        issuer:"http://localhost:3001",
+    });
+
+    res.cookie("token",token, {
+        secure: false,
+        httpOnly: true
+    });
+    res.send();
 });
 
 router.get("/token", async(req, res) => {
