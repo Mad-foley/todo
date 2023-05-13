@@ -65,7 +65,7 @@ router.get("/token", async(req, res) => {
     else token=req.headers.cookie.slice(6);
 
     if (token == null) {
-        res.status(401).json({ token: false }); // Unauthorized
+        res.json({ token: false }); // Unauthorized
     }
 
     const decoded = jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
