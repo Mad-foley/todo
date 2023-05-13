@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt, { hash } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { UserModel } from '../models/user.js';
 import dotenv from 'dotenv';
 
@@ -53,7 +53,7 @@ router.post("/login", async(req, res) => {
 
     res.cookie("token",token, {
         secure: false,
-        httpOnly: true
+        httpOnly: true,
     });
     res.send();
 });
@@ -67,7 +67,7 @@ router.get("/token", async(req, res) => {
     if (token == null) {
         res.status(401).json({ token: false }); // Unauthorized
     }
-    
+
     const decoded = jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
         if (err) {
           res.status(403).send(); // Forbidden
