@@ -10,7 +10,7 @@ const HomePage = () => {
             setToken(await getAccessTokenSilently());
             const response = await fetch('http://localhost:3001/api/public', {
                 method: 'GET',
-                // headers: { Authorization: 'Bearer ' + token }
+                headers: { Authorization: 'Bearer ' + token }
             });
 
             if(response.ok) {
