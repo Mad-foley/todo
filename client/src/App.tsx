@@ -1,11 +1,12 @@
-import React from 'react';
 import Navbar from './app/components/Navbar';
-import Profile from './app/pages/Profile'
+import HomePage from './app/components/Home';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <HomePage />
     </div>
   );
 }

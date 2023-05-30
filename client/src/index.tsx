@@ -13,7 +13,8 @@ root.render(
     domain="dev-go5t6s26j0b5gebu.us.auth0.com"
     clientId="yBFF4yC00RBG0HipoY1tajzJWaXlSe7a"
     authorizationParams={{
-      redirect_uri: window.location.origin
+      redirect_uri: window.location.origin,
+      audience: 'http://localhost:8000'
     }}>
       <App />
     </Auth0Provider>
