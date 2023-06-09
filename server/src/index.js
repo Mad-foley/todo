@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { auth } from 'express-oauth2-jwt-bearer';
+import { userRouter } from './routes/user.js';
 
 const app = express();
 
@@ -24,13 +25,15 @@ app.get('/api/public', function(req, res) {
       message: 'Hello from a public endpoint! You don\'t need to be authenticated to see this.'
     });
 });
-
+app.use("/user", userRouter)
 // This route needs authentication
 app.get('/api/private', checkJwt, function(req, res) {
+  console.log(res)
     res.json({
       message: 'Hello from a private endpoint! You need to be authenticated to see this.'
     });
 });
+
 
 
 

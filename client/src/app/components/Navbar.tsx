@@ -9,12 +9,13 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             {
-                isAuthenticated ?
+                isAuthenticated &&
                 <>
                     <LogoutButton/>
                 </>
-
-                :
+            }
+            {
+                !isAuthenticated &&
                  <LoginButton/>
             }
         </nav>
