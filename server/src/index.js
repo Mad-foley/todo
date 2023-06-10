@@ -25,7 +25,9 @@ app.get('/api/public', function(req, res) {
       message: 'Hello from a public endpoint! You don\'t need to be authenticated to see this.'
     });
 });
+
 app.use("/user", userRouter)
+
 // This route needs authentication
 app.get('/api/private', checkJwt, function(req, res) {
   console.log(res)
