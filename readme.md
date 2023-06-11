@@ -1,5 +1,7 @@
 Creating Todo Application
 
+Both App and Readme not complete, just adding things as I build.
+
 # Auth0: #
 I utilized Auth0 for this application with built in user storage features. Only email will be stored to a mongodb atlas.
 

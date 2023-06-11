@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { auth } from 'express-oauth2-jwt-bearer';
 import { userRouter } from './routes/user.js';
+import { categoryRouter } from './routes/category.js';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get('/api/public', function(req, res) {
 });
 
 app.use("/user", userRouter)
+app.use("/category", categoryRouter)
 
 // This route needs authentication
 app.get('/api/private', checkJwt, function(req, res) {
