@@ -1,13 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
-
 
 const HomePage = () => {
-
+    const {user} = useAuth0();
 
     return(
         <div>
-            HomePage
+            HomePage {user?.email}
         </div>
     )
 }

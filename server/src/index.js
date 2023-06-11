@@ -39,5 +39,5 @@ app.get('/api/private', checkJwt, function(req, res) {
 
 
 
-mongoose.connect(`mongodb+srv://maddy-foley-5:${process.env.MONGO_PASS}@todo.hhd2kpw.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_PASS}`)
 app.listen(3001, () => console.log("Server Started"))

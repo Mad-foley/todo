@@ -12,13 +12,12 @@ const checkJwt = auth({
 //password and username stored in extrenal database with auth0
 router.post("/register", checkJwt, async(req, res) => {
     const { email } = req.body;
-    const user = await UserModel.findOne({ email });
-
+    const user = await UserModel.findOne({email: email});
     if (user) {
         return res.json({message: "user already exists"})
     }
 
-    const newUser = new UserModel({email});
+    const newUser = new UserModel({email: email});
     await newUser.save();
 
     res.json({message: "user successfully added to database"})
