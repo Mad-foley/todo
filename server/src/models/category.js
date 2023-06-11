@@ -7,7 +7,7 @@ const CategorySchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     createdOn: { type: Date, required: true },
-    owner: {type: mongoose.Schema.Types.ObjectId , ref: "users", required: true}
+    owner: { type: mongoose.Schema.Types.ObjectId , ref: "users", required: true }
 });
 
 export const CategoryModel = mongoose.model("categories", CategorySchema);

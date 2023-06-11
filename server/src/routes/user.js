@@ -1,13 +1,13 @@
 import express from 'express';
 import { auth } from 'express-oauth2-jwt-bearer';
-import { UserModel } from '../models/user.js';
+import { UserModel } from '../models/user.js'
 
 const router = express.Router();
 
-const checkJwt = auth({
+export const checkJwt = auth({
     audience: 'http://localhost:8000',
     issuerBaseURL: 'https://dev-go5t6s26j0b5gebu.us.auth0.com/'
-})
+});
 
 //password and username stored in extrenal database with auth0
 router.post("/register", checkJwt, async(req, res) => {
