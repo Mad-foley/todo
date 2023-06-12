@@ -9,8 +9,6 @@ const router = express.Router();
 router.post("/", async(req, res) => {
     const email = process.env.TEST_EMAIL
     const user = await UserModel.findOne({email: email})
-    console.log(user)
-    console.log(user._id)
     if(user){
         const {name, createdOn, description} = req.body
         const category = new CategoryModel({name, createdOn, description, owner: user._id});
@@ -39,5 +37,24 @@ router.get("/", async(req, res) => {
         res.json(err);
     }
 });
+
+// get individual category
+router.get("/:id", async(req, res) => {
+    try{
+        const category = await CategoryModel.findById(req.params.id);
+        res.json({ category });
+    } catch(err){
+        res.json(err);
+    }
+})
+
+router.delete("/:id", async(req, res) => {
+    try{
+        const category = await CategoryModel.deleteOne({_id: req.params.id});
+        res.json(category)
+    } catch(err){
+        res.json(err);
+    }
+})
 
 export { router as categoryRouter }
