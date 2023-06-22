@@ -2,6 +2,7 @@ import express from 'express';
 import { CategoryModel } from '../models/category.js';
 import { UserModel } from '../models/user.js';
 import { checkJwt } from './user.js';
+import { ItemModel } from '../models/item.js';
 
 const router = express.Router();
 
@@ -48,10 +49,12 @@ router.get("/:id", async(req, res) => {
     }
 })
 
+//cascade delete
 router.delete("/:id", async(req, res) => {
     try{
+        const items = await ItemModel.deleteMany({itemCategory: req.params.id});
         const category = await CategoryModel.deleteOne({_id: req.params.id});
-        res.json(category)
+        res.json({category, items})
     } catch(err){
         res.json(err);
     }

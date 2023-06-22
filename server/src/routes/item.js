@@ -51,4 +51,13 @@ router.put("/:category_id/:item_id", async(req, res) => {
     }
 });
 
+router.delete("/:category_id/:item_id", async(req, res) => {
+    try{
+        const category = await ItemModel.deleteOne({itemCategory: req.params.category_id, _id: req.params.item_id});
+        res.json(category)
+    } catch(err){
+        res.json(err);
+    }
+});
+
 export { router as itemRouter }
