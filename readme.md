@@ -14,3 +14,6 @@ I utilized Auth0 for this application with built in user storage features. Only 
 ```
 MONGO_PASS=<copied portion of string>
 ```
+
+***NOTE***
+Frontend incomplete and built primarily to practice auth0, mongodb and node.js/express.js -> planning to move on soon to develop an interesting project
