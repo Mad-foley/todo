@@ -15,7 +15,7 @@ router.get("/:category_id", async(req, res) => {
     } catch (err) {
         return res.json(err);
     }
-})
+});
 
 //get single item from category
 router.get("/:category_id/:item_id", async(req, res) => {
@@ -25,7 +25,7 @@ router.get("/:category_id/:item_id", async(req, res) => {
     } catch(err){
         return res.json(err);
     }
-})
+});
 
 router.post("/:category_id", async(req, res) => {
     const {name, startDate, endDate, isCompleted } = req.body;
@@ -36,6 +36,18 @@ router.post("/:category_id", async(req, res) => {
         return res.json(response)
     } catch (err){
         return res.json(err)
+    }
+});
+
+router.put("/:category_id/:item_id", async(req, res) => {
+    const item = await ItemModel.findOne({itemCategory:req.params.category_id, _id: req.params.item_id});
+    try {
+        const {name, startDate, endDate, isCompleted} = req.body;
+        Object.assign(item, {name, startDate, endDate, isCompleted});
+        await item.save();
+        return res.json(item)
+    } catch(err){
+        return res.json(err);
     }
 });
 
