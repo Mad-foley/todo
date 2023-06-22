@@ -4,12 +4,25 @@ import { ItemModel } from '../models/item.js';
 
 const router = express.Router();
 
+//PERSONAL NOTE:
+//may need to add authenication later
+
 //get all items in category
 router.get("/:category_id", async(req, res) => {
     try{
         const items = await ItemModel.find({itemCategory: req.params.category_id})
         return res.json(items)
     } catch (err) {
+        return res.json(err);
+    }
+})
+
+//get single item from category
+router.get("/:category_id/:item_id", async(req, res) => {
+    try{
+        const item = await ItemModel.findOne({itemCategory:req.params.category_id, _id: req.params.item_id})
+        return res.json(item);
+    } catch(err){
         return res.json(err);
     }
 })
