@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { auth } from 'express-oauth2-jwt-bearer';
 import { userRouter } from './routes/user.js';
 import { categoryRouter } from './routes/category.js';
+import { itemRouter } from './routes/item.js';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get('/api/public', function(req, res) {
 
 app.use("/user", userRouter)
 app.use("/category", categoryRouter)
+app.use("/item", itemRouter)
 
 // This route needs authentication
 app.get('/api/private', checkJwt, function(req, res) {
