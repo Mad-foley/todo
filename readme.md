@@ -16,4 +16,5 @@ MONGO_PASS=<copied portion of string>
 ```
 
 ***NOTE***
-Frontend incomplete and built primarily to practice auth0, mongodb and node.js/express.js -> planning to move on soon to develop an interesting project
+
+The frontend will remain incomplete as this project was built primarily to practice auth0, mongodb and node.js/express.js -> planning to move on soon to develop an interesting project
