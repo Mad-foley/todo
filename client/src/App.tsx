@@ -34,10 +34,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      {
-        isAuthenticated &&
-        <HomePage />
-      }
+      <HomePage />
     </div>
   );
 }

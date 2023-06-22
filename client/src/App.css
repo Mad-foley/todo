@@ -3,6 +3,18 @@ html{
   color: rgb(213, 204, 204);
 }
 
-nav > button {
-  border: 1px solid red;
+.navbar {
+  display: flex;
+  justify-content: end;
+  margin: 10px;
+}
+
+.homepage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.homepage > .content {
+  grid-column-start: 2;
+  text-align: center;
 }
